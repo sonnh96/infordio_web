@@ -30,6 +30,7 @@ def index():
 			res['text'] = getText(file.filename)
 			res['img'] = getBox(file.filename)
 			res['raw'] = file.filename
+			res['mess'] = 'Success'
 			return jsonify(res)
 		else:
 			return jsonify({'mess' : 'File extension not allow'})
@@ -47,27 +48,10 @@ def getBox(file):
 	x = res.content.encode("base64")
 	return x
 
-@app.route('/upload', methods=('GET', 'POST'))
-def upload():
-	res = []
-	if request.method == 'POST':
-		if 'file' not in request.files:
-			return jsonify({'mess' : 'File not found'})
-		file = request.files['file']
-		if file.name == '':
-			return jsonify({'mess' : 'File not found'})
-		if file and allowed_file(file.filename):
-			file.save(os.path.join(UPLOAD_FOLDER, file.filename))
-			res = getData(file.filename)
-			return jsonify(res)
-		else:
-			return jsonify({'mess' : 'File extension not allow'})
-	return jsonify({'mess' : 'Error'})
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--host', '-H', default='0.0.0.0')
-    parser.add_argument('--port', '-p', dest='port', default=10996)
+    parser.add_argument('--port', '-p', dest='port', default=10999)
     parser.add_argument('--debug', dest='debug', default=True)
     args = parser.parse_args()
     app.run(host=args.host, port=args.port, debug=args.debug)

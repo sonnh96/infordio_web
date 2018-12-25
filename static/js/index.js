@@ -41,14 +41,18 @@ function uploadFile() {
             contentType: false,
             processData: false,
             success: function(res){
-             	$('body').removeClass("loading");
-             	$('.upload-box').remove();
-             	$('.main-content').show();
-             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
-             	$('.box-image').append(html1);
-             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
-             	$('.origin-image').append(html2);
-             	textFill(res.text.result);
+            	$('body').removeClass("loading");
+            	if (res.mess == 'Success') {
+	             	$('.upload-box').remove();
+	             	$('.main-content').show();
+	             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
+	             	$('.box-image').append(html1);
+	             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
+	             	$('.origin-image').append(html2);
+	             	textFill(res.text.result);
+                } else {
+                	alert(res.mess);
+                }
             },error: function(res){
             	$('body').removeClass("loading")
                 alert(res);
@@ -73,15 +77,18 @@ function autoUpload(){
             contentType: false,
             processData: false,
             success: function(res){
-            	console.log(res);
              	$('body').removeClass("loading");
-             	$('.box-image').empty();
-             	$('.origin-image').empty();
-             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
-             	$('.box-image').append(html1);
-             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
-             	$('.origin-image').append(html2);
-             	textFill(res.text.result);
+            	if (res.mess == 'Success') {
+	             	$('.box-image').empty();
+	             	$('.origin-image').empty();
+	             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
+	             	$('.box-image').append(html1);
+	             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
+	             	$('.origin-image').append(html2);
+             		textFill(res.text.result);
+         		} else {
+                	alert(res.mess);
+                }
             },error: function(res){
             	$('body').removeClass("loading");
                 alert(res);
@@ -103,18 +110,15 @@ function textFill(res){
 
 $(document).ready(function () {
     uploadFile();
-
 	autoUpload();
 	$('.btn-clear').click(function(){
 		window.location.reload();
-	})
-
-	$('.modal-dialog').draggable({
-		axis: "y",
-		scroll: false
 	});
-	
 	$(document).on('click','.rimages', function(){
+		$('.modal-dialog').draggable({
+			axis: "y",
+			scroll: false
+		});
     	$('.imagepreview').attr('src', $(this).attr('src'));
 		$('#imagemodal').modal('show');
 		var zX = 1;
@@ -127,8 +131,13 @@ $(document).ready(function () {
 	            dir -= 0.1;
 	        }
 		    zX += dir;
-		    if (zX < 2) {
+		    console.log(zX);
+		    if (zX < 2.5 && zX >= 1) {
 		    	$(this).css('transform', 'scale(' + zX + ')');
+		    } else if(zX >= 2.5) {
+		    	zX = 2.5;
+		    } else {
+		    	zX = 1;
 		    }
 		});
 	});

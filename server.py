@@ -67,7 +67,7 @@ def upload():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--host', '-H', default='0.0.0.0')
-    parser.add_argument('--port', '-p', dest='port', default=10999)
+    parser.add_argument('--port', '-p', dest='port', default=10996)
     parser.add_argument('--debug', dest='debug', default=True)
     args = parser.parse_args()
     app.run(host=args.host, port=args.port, debug=args.debug)

@@ -1,0 +1,265 @@
+/* import font */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,600,700,900,300');
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: #f5f5f5;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+// Variables
+// ----------------------------
+// Color
+@primary-color: #AACE93;
+@secon-color: #738e62;
+@gray-darker: #212121; // text
+@gray-dark: #757575; // secondary text, icons
+@gray: #bdbdbd; // hint text
+@gray-light: #e0e0e0; // divider
+@gray-lighter: #f5f5f5; // background
+@btn: ;
+//** Typographic Scale
+@desktop:   ~"only screen and (min-width: 1401px) and (max-width: 1921px)";
+@smalldesktop:    ~"only screen and (min-width: 1024px) and (max-width: 1400px)";
+@tablet:    ~"only screen and (min-width: 768px) and (max-width: 1023px)";
+@mobile: 	~"only screen and (min-width: 320px) and (max-width: 767px)";
+@left-width: 286px;
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 5px;
+    margin-left: 6px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {   
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: rgba(0,0,0,0.03);    
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: rgba(0,0,0,0.2);     
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.2); 
+}
+
+/****/
+::-webkit-scrollbar:horizontal {
+    height: 5px;
+    margin-left: 6px;
+}
+a{
+	color: #666;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
+a:hover, a:focus{
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+    color: @primary-color;
+}
+
+.upload-box {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    // display: none;
+    form {
+        background-color: #ffffff;
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        font-size: 1.8rem;
+        position: relative;
+        padding: 100px 20px;
+        text-align: center;
+        height: 100%;
+        .box__dragndrop,
+        .box__uploading,
+        .box__success,
+        .box__error {
+            display: none;
+        }
+        .box__icon {
+            width: 100%;
+            height: 80px;
+            fill: #92b0b3;
+            display: block;
+            margin-bottom: 40px;
+        }
+        .box__file {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0; 
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        .box__dragndrop {
+            display: inline;
+        }
+        label {
+            max-width: 80%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            display: inline;
+            font-weight: normal;
+            &:hover strong{
+                color: #39bfd3;
+            }
+        }
+        .box__button {
+            font-weight: 700;
+            color: #e5edf1;
+            background-color: #39bfd3;
+            display: block;
+            padding: 8px 16px;
+            margin: 40px auto;
+            border: none;
+            -webkit-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            &:hover {
+                background-color: #0f3c4b;
+            }
+        }
+    }
+    form.is-dragover {
+        outline-offset: -20px;
+        outline-color: #ffffff;
+        background-color: #c8dadf;
+    }
+}
+
+.main-content {
+    display: none;
+    .small-upload {
+        border-bottom: solid 1px #fff;
+        padding: 10px 0;
+        .box__file {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0; 
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        .btn {
+            border: solid 1px #0f3c4b;
+            padding: 5px 10px;
+            display: inline-block;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-right: 20px;
+            -webkit-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            &:hover {
+                background-color: #ecf5ff;
+                border-color: #c6e2ff;
+                color: #409eff;
+            }
+        }
+        .btn-upload {
+            &:before {
+                font-size: 20px;
+                display: inline-block;
+                font-family: 'Glyphicons Halflings';
+                content: "\e198";
+            }
+        }
+        .btn-clear {
+            &:before {
+                font-size: 20px;
+                display: inline-block;
+                font-family: 'Glyphicons Halflings';
+                content: "\e031";
+            }
+        }
+    }
+    img {
+        width: inherit;
+        cursor: zoom-in;
+    }
+    .box-image{
+        width: 90%;
+    }
+    .origin-image {
+        width: 70%;
+    }
+    table {
+        td, th {
+            border-left: solid 1px #ddd;
+        }
+        th, td:first-child {
+            text-align: center;
+        }
+    }
+}
+
+.loader {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+body.loading {
+    overflow: hidden;   
+}
+body.loading .loader {
+    display: block;
+}
+
+.modal-dialog {
+    height: 800px !important;
+}
+
+//responsive
+@media @desktop {
+
+}
+
+@media @smalldesktop {
+
+}
+
+@media @tablet {
+	
+}
+
+@media @mobile {
+	
+}
+
+
+
+

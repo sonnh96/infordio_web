@@ -45,7 +45,7 @@ function uploadFile() {
             	if (res.mess == 'Success') {
 	             	$('.upload-box').remove();
 	             	$('.main-content').show();
-	             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
+	             	var html1 = '<img class="rimages" src="static/img/'+res.img+'">';
 	             	$('.box-image').append(html1);
 	             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
 	             	$('.origin-image').append(html2);
@@ -81,7 +81,7 @@ function autoUpload(){
             	if (res.mess == 'Success') {
 	             	$('.box-image').empty();
 	             	$('.origin-image').empty();
-	             	var html1 = '<img class="rimages" src="data:image/png;base64,'+res.img+'">';
+	             	var html1 = '<img class="rimages" src="static/img/'+res.img+'">';
 	             	$('.box-image').append(html1);
 	             	var html2 = '<img class="rimages" src="static/img/'+res.raw+'">';
 	             	$('.origin-image').append(html2);

@@ -45,13 +45,14 @@ def getText(file):
 def getBox(file):
 	data = {'file' : open(UPLOAD_FOLDER + file, 'rb')}
 	res = requests.post('https://118.70.127.230:5050/infordio/get_box', files = data, verify=False)
-	x = res.content.encode("base64")
-	return x
+	with open(UPLOAD_FOLDER + 'box_'+file, 'wb') as f:
+		f.write(res.content)
+	return 'box_'+file
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--host', '-H', default='0.0.0.0')
-    parser.add_argument('--port', '-p', dest='port', default=10999)
+    parser.add_argument('--host', '-H', default='127.0.0.1')
+    parser.add_argument('--port', '-p', dest='port', default=9093)
     parser.add_argument('--debug', dest='debug', default=True)
     args = parser.parse_args()
-    app.run(host=args.host, port=args.port, debug=args.debug)
+    app.run(host=args.host, port=args.port, debug=args.debug, ssl_context=('cert.pem', 'key.pem'))
